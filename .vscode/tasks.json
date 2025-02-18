@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: build",
+      "type": "npm",
+      "script": "build",  // 确保这里的 "build" 和 package.json 中一致
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

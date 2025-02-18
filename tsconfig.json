@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",          // 编译目标版本
+    "module": "CommonJS",             // Node.js 推荐 CommonJS
+    "rootDir": "./src",          // 源代码目录
+    "outDir": "./dist",          // 输出目录
+    "strict": true,              // 启用严格类型检查
+    "esModuleInterop": true,     // 兼容 CommonJS/ES 模块
+    "skipLibCheck": true,        // 跳过第三方库类型检查
+    "moduleResolution": "node",   // 模块解析策略
+    "resolveJsonModule": true,  // 支持导入 JSON
+    "typeRoots": ["./node_modules/@types", "./typings"],  // 类型定义文件目录
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
