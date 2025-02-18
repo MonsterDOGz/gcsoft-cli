@@ -4,7 +4,7 @@
  * @Description: 入口文件
  * @FilePath: \gcsoft-cli\src\main.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-18 09:55:30
+ * @LastEditTime: 2025-02-18 16:17:51
  */
 import { Command  } from 'commander';
 import { VERSION } from './utils/constants';
@@ -14,7 +14,6 @@ const program = new Command();
 
 program
   .name('gcsoft-cli')
-  .usage('<command> [options]')
   .description('一个简单的脚手架工具')
   .version(VERSION, '-V, --version', '输出版本号');
 
@@ -29,12 +28,14 @@ interface IActionMap {
         description: string;
         usages: string[];
         arguments?: IArgument[];
+        actionFunc: (...args: string[]) => void;
     };
 }
+
 /**
  * gcsoft commands
- *    - config
  *    - init 
+ *    - config
  */
 const actionMap: IActionMap = {
     init: {
@@ -45,18 +46,21 @@ const actionMap: IActionMap = {
         arguments: [
             {
                 key: 'templateName',
-                required: false,
+                required: true,
                 description: '模板名称'
             },
             {
                 key: 'projectName',
-                required: false,
+                required: true,
                 description: '你的项目名称'
             }
-        ]
+        ],
+        actionFunc: (templateName, projectName) => {
+            apply('init', templateName, projectName);
+        }
     },
     config: {
-        description: '配置 .gcsoftrc 文件',
+        description: '配置 .gcsoftrc 文件，handle: get/set/remove',
         usages: [
             'gcsoft config set <key> <value>',
             'gcsoft config get <key>',
@@ -71,14 +75,17 @@ const actionMap: IActionMap = {
             {
                 key: 'key',
                 required: false,
-                description: '如果handle为get，可不需要key'
+                description: '请输入键名'
             },
             {
                 key: 'value',
                 required: false,
                 description: '如果handle为set，则需要value'
             }
-        ]
+        ],
+        actionFunc: (handle, key, value) => {
+            apply('config', handle, key, value);
+        }
         
     },
     //other commands
@@ -93,38 +100,23 @@ Object.keys(actionMap).forEach((action: string) => {
         command.argument(argument.required ? `<${argument.key}>` : `[${argument.key}]`, argument.description);
     });
 
-    command.action(() => {
-        switch (action) {
-            case 'config': 
-                //配置
-                apply(action, ...process.argv.slice(3));
-                break;
-            case 'init':
-                apply(action, ...process.argv.slice(3));
-                break;
-            default:
-                break;
-        }
+    command.action((...args) => {
+        actionMap[action].actionFunc(...args);
     });
 });
 
+// 自定义帮助信息
 function help() {
-    console.log('\r\nUsage:');
+    let res = '\r\nExample call:\r\n'
     Object.keys(actionMap).forEach((action) => {
         actionMap[action].usages.forEach((usage: string) => {
-            console.log('  - ' + usage);
+           res += '  - ' + usage + '\r\n';
         });
     });
-    console.log('\r');
+    res += '\r';
+    return res
 }
-
-// gcsoft -h 
-// program.on('-h', help);
-// program.on('--help', help);
-
-// gcsoft 不带参数时
-// if (!process.argv.slice(2).length) {
-    program.showHelpAfterError('(add --help for additional information)');
-// }
+program.addHelpText('after', help());
+program.showHelpAfterError('(add --help for additional information)');
 
 program.parse();

@@ -4,70 +4,61 @@
  * @Description: 配置文件
  * @FilePath: \gcsoft-cli\src\utils\rc.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-17 17:38:46
+ * @LastEditTime: 2025-02-18 16:58:11
  */
-import { RC, DEFAULTS } from './constants';
-import { decode, encode } from 'ini';
-import { promisify } from 'util';
+import { stat, readFile, writeFile } from 'fs/promises'
+import { parse, stringify } from 'ini';
 import chalk from 'chalk';
-import fs from 'fs';
+import { RC, DEFAULTS } from './constants';
 
-const exits = promisify(fs.exists);
-const readFile = promisify(fs.readFile);
-const writeFile = promisify(fs.writeFile);
-
-//RC 是配置文件
-//DEFAULTS 是默认的配置
-export const get = async (key: any) => {
-    const exit = await exits(RC);
+// RC 是配置文件
+// DEFAULTS 是默认的配置
+export const get = async (key: string) => {
+    const exist = await stat(RC);
     let opts;
-    if (exit) {
+    if (exist) {
         opts = await readFile(RC, 'utf8');
-        opts = decode(opts);
+        opts = parse(opts);
         return opts[key];
     }
     return '';
 }
 
 export const getAll = async () => {
-    const exit = await exits(RC);
+    const exist = await stat(RC);
     let opts;
-    if (exit) {
+    if (exist) {
         opts = await readFile(RC, 'utf8');
-        opts = decode(opts);
+        opts = parse(opts);
         return opts;
     }
     return {};
 }
 
-export const set = async (key: any, value: any) => {
-    const exit = await exits(RC);
+export const set = async (key: string, value: string | undefined) => {
+    if(!value) {
+        console.log(chalk.red(chalk.bold('Error:')), chalk.red('value is required'));
+        return;
+    }
+    const exist = await stat(RC);
     let opts;
-    if (exit) {
+    if (exist) {
         opts = await readFile(RC, 'utf8');
-        opts = decode(opts);
-        if(!key) {
-            console.log(chalk.red(chalk.bold('Error:')), chalk.red('key is required'));
-            return;
-        }
-        if(!value) {
-            console.log(chalk.red(chalk.bold('Error:')), chalk.red('value is required'));
-            return;
-        }
+        opts = parse(opts);
         Object.assign(opts, { [key]: value });
     } else {
         opts = Object.assign(DEFAULTS, { [key]: value });
     }
-    await writeFile(RC, encode(opts), 'utf8');
+    await writeFile(RC, stringify(opts), 'utf8');
 }
 
-export const remove = async (key: any) => {
-    const exit = await exits(RC);
+export const remove = async (key: string) => {
+    const exist = await stat(RC);
     let opts;
-    if (exit) {
+    if (exist) {
         opts = await readFile(RC, 'utf8');
-        opts = decode(opts);
+        opts = parse(opts);
         delete opts[key];
-        await writeFile(RC, encode(opts), 'utf8');
+        await writeFile(RC, stringify(opts), 'utf8');
     }
 }
