@@ -1,0 +1,26 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main # 只有推送到特定分支时才会触发
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.16.0' # 根据需要调整版本号
+          registry-url: 'https://registry.npmjs.org'
+      
+      - run: npm install
+      - run: npm run build # 如果你有构建步骤的话
+      
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
