@@ -14,7 +14,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.16.0' # 根据需要调整版本号
+          node-version: '18.20.6' # 根据需要调整版本号
           registry-url: 'https://registry.npmjs.org'
       
       - run: npm install

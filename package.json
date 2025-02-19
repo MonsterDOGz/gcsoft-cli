@@ -7,7 +7,6 @@
     "gcsoft": "./bin/www"
   },
   "scripts": {
-    "postinstall": "gcsoft config set",
     "dev": "ts-node src/main.ts",
     "build": "tsc",
     "watch": "tsc --watch"
