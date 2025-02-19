@@ -1,8 +1,8 @@
-// 使用 ts-node 在开发环境运行 TypeScript 文件
 {
   "version": "0.2.0",
   "configurations": [
     {
+      // 使用 ts-node 在开发环境运行 TypeScript 文件
       "type": "node",
       "request": "launch",
       "name": "Launch Program with ts-node",
@@ -16,26 +16,20 @@
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js"  // 可选
       ]
+    },
+    {
+      // 使用 tsc 编译 TypeScript 文件后在生产环境运行 JavaScript 文件
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program with tsc",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/dist/main.js",
+      "preLaunchTask": "npm: build",  // 与 .vscode/tasks.json 中的任务名一致
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ],
     }
   ]
 }
-
-// 使用 tsc 编译 TypeScript 文件后在生产环境运行 JavaScript 文件
-// {
-//   "version": "0.2.0",
-//   "configurations": [
-//     {
-//       "type": "node",
-//       "request": "launch",
-//       "name": "Launch Program with tsc",
-//       "skipFiles": [
-//         "<node_internals>/**"
-//       ],
-//       "program": "${workspaceFolder}/dist/main.js",
-//       "preLaunchTask": "npm: build",  // 与 .vscode/tasks.json 中的任务名一致
-//       "outFiles": [
-//         "${workspaceFolder}/dist/**/*.js"
-//       ],
-//     }
-//   ]
-// }

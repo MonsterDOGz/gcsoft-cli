@@ -12,13 +12,10 @@
 - `gcsoft init vue-template myVue` 根据模版，初始化一个项目
 - `gcsoft config get` 查看配置信息
 - `gcsoft config set <key> <value>` 修改配置信息
+- `gcsoft config remove <key>` 删除配置信息
 - `gcsoft --version` 查看当前版本号
-- `gcsoft -h` 查看帮助信息
+- `gcsoft --help` 查看帮助信息
 
 举例:
-- `gcsoft config set type orgs`
-- `gcsoft config set registry vuejs-templates` 修改配置信息
-- `gcsoft config set type users` 修改配置信息
-- `gcsoft config set registry MonsterDOGz` 修改配置信息
-
-### 发布
+- `gcsoft config set type users`
+- `gcsoft config set registry MonsterDOGz`

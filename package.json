@@ -1,7 +1,7 @@
 {
   "name": "gcsoft-cli",
   "version": "1.0.8",
-  "description": "脚手架",
+  "description": "一个简单的脚手架工具",
   "main": "index.ts",
   "bin": {
     "gcsoft": "./bin/www"
