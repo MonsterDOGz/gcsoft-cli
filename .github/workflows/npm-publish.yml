@@ -18,7 +18,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       
       - run: npm install
-      - run: npm run build # 如果你有构建步骤的话
+      - run: npm run build
       
       - name: Publish to npm
         run: npm publish

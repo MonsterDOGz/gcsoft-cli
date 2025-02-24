@@ -1,6 +1,6 @@
 {
   "name": "gcsoft-cli",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "一个简单的脚手架工具",
   "repository": {
     "type": "git",
@@ -19,6 +19,12 @@
   "license": "ISC",
   "keywords": [
     "cli"
+  ],
+  "files": [
+    "bin",
+    "lib",
+    "package.json",
+    "README.md"
   ],
   "dependencies": {
     "@inquirer/prompts": "^7.3.2",
