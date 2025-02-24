@@ -4,7 +4,7 @@
  * @Description: 入口文件
  * @FilePath: \gcsoft-cli\src\main.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-18 16:17:51
+ * @LastEditTime: 2025-02-24 17:44:39
  */
 import { Command  } from 'commander';
 import { VERSION } from './utils/constants';
@@ -38,39 +38,57 @@ interface IActionMap {
  *    - config
  */
 const actionMap: IActionMap = {
+    // init: {
+    //     description: '从模板中生成新项目',
+    //     usages: [
+    //         'gcsoft init templateName projectName'
+    //     ],
+    //     arguments: [
+    //         {
+    //             key: 'templateName',
+    //             required: true,
+    //             description: '模板名称'
+    //         },
+    //         {
+    //             key: 'projectName',
+    //             required: true,
+    //             description: '你的项目名称'
+    //         }
+    //     ],
+    //     actionFunc: (templateName, projectName) => {
+    //         apply('init', templateName, projectName);
+    //     }
+    // },
     init: {
         description: '从模板中生成新项目',
         usages: [
-            'gcsoft init templateName projectName'
+            'gcsoft init projectName'
         ],
         arguments: [
-            {
-                key: 'templateName',
-                required: true,
-                description: '模板名称'
-            },
             {
                 key: 'projectName',
                 required: true,
                 description: '你的项目名称'
             }
         ],
-        actionFunc: (templateName, projectName) => {
-            apply('init', templateName, projectName);
+        actionFunc: (projectName) => {
+            apply('init', projectName);
         }
     },
     config: {
-        description: '配置 .gcsoftrc 文件，handle: get/set/remove',
+        description: '配置 .gcsoftrc 文件，handle: init/get/set/remove',
         usages: [
-            'gcsoft config set <key> <value>',
+            'gcsoft config init',
+            'gcsoft config get',
             'gcsoft config get <key>',
+            'gcsoft config set <key> <value>',
             'gcsoft config remove <key>'
         ],
         arguments: [
             {
                 key: 'handle',
                 required: true,
-                description: 'set/get/remove'
+                description: 'init/get/set/remove'
             },
             {
                 key: 'key',
@@ -86,9 +104,7 @@ const actionMap: IActionMap = {
         actionFunc: (handle, key, value) => {
             apply('config', handle, key, value);
         }
-        
     },
-    //other commands
 }
 
 // 添加 init / config 命令

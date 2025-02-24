@@ -4,7 +4,7 @@
  * @Description: 定义常量
  * @FilePath: \gcsoft-cli\src\utils\constants.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-18 16:56:40
+ * @LastEditTime: 2025-02-24 16:08:36
  */
 import { version } from '../../package.json';
 
@@ -24,4 +24,6 @@ export const RC = `${HOME}/.gcsoftrc`;
 export const DEFAULTS = {
     type: 'users',
     registry: 'MonsterDOGz',
+    vue3: 'homepage',
+    vue2: 'vue-cli4-demo',
 }

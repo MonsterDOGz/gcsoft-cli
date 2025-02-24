@@ -4,13 +4,16 @@
  * @Description: 管理 .gcsoftrc 配置文件 (当前用户目录下)
  * @FilePath: \gcsoft-cli\src\config.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-18 16:01:06
+ * @LastEditTime: 2025-02-24 17:30:00
  */
 import chalk from 'chalk';
-import { get, set, getAll, remove } from './utils/rc';
+import { init, get, set, getAll, remove } from './utils/rc';
 
 const config = async (handle: string, key: string | undefined, value: string | undefined) => {
     switch (handle) {
+        case 'init':
+            init();
+            break;
         case 'get':
             if (key) {
                 let result = await get(key);
