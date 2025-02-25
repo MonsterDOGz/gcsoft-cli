@@ -4,7 +4,7 @@
  * @Description: 入口文件
  * @FilePath: \gcsoft-cli\src\main.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-24 17:44:39
+ * @LastEditTime: 2025-02-25 15:53:56
  */
 import { Command  } from 'commander';
 import { VERSION } from './utils/constants';
@@ -38,27 +38,6 @@ interface IActionMap {
  *    - config
  */
 const actionMap: IActionMap = {
-    // init: {
-    //     description: '从模板中生成新项目',
-    //     usages: [
-    //         'gcsoft init templateName projectName'
-    //     ],
-    //     arguments: [
-    //         {
-    //             key: 'templateName',
-    //             required: true,
-    //             description: '模板名称'
-    //         },
-    //         {
-    //             key: 'projectName',
-    //             required: true,
-    //             description: '你的项目名称'
-    //         }
-    //     ],
-    //     actionFunc: (templateName, projectName) => {
-    //         apply('init', templateName, projectName);
-    //     }
-    // },
     init: {
         description: '从模板中生成新项目',
         usages: [

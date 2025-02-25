@@ -14,13 +14,19 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.20.6' # 根据需要调整版本号
+          node-version: '18.20.6'
           registry-url: 'https://registry.npmjs.org'
-      
-      - run: npm install
-      - run: npm run build
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm run build
       
       - name: Publish to npm
-        run: npm publish
+        run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

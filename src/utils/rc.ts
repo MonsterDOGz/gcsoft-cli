@@ -4,7 +4,7 @@
  * @Description: 配置文件
  * @FilePath: \gcsoft-cli\src\utils\rc.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-24 17:26:38
+ * @LastEditTime: 2025-02-25 10:19:01
  */
 import { stat, readFile, writeFile } from 'fs/promises'
 import { parse, stringify } from 'ini';
@@ -21,8 +21,6 @@ export const init = async () => {
     }
 }
 
-// RC 是配置文件
-// DEFAULTS 是默认的配置
 export const get = async (key: string) => {
     const exist = await stat(RC).catch(err => {
         console.log(chalk.red(chalk.bold('Error:')), chalk.red(err.message));
@@ -75,6 +73,7 @@ export const set = async (key: string, value: string | undefined) => {
 export const remove = async (key: string) => {
     const exist = await stat(RC).catch(err => {
         console.log(chalk.red(chalk.bold('Error:')), chalk.red(err.message));
+        console.log(chalk.yellow('请先执行 gcsoft config init 命令，初始化配置文件 .gcsoftrc'));
     });
     let opts;
     if (exist) {
