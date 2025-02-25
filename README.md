@@ -15,6 +15,7 @@ pnpm add -g gcsoft-cli
 ## Usage
 
 - `gcsoft init myProject` 初始化一个新项目，选择模板
+- `gcsoft config init` 初始化本地配置文件
 - `gcsoft config get` 查看所有配置信息
 - `gcsoft config set <key> <value>` 修改配置信息
 - `gcsoft config remove <key>` 删除配置信息
