@@ -4,7 +4,7 @@
  * @Description: 初始化模板命令
  * @FilePath: \gcsoft-cli\src\init.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-25 15:27:21
+ * @LastEditTime: 2025-02-26 10:43:21
  */
 import { exec } from 'child_process';
 import { downloadLocal } from './utils/get';
@@ -56,6 +56,21 @@ const init = async (projectName: string) => {
                 author: await input({ message: '请输入作者姓名: ' }),
             };
 
+            // 选择包管理器
+            const packageManager = await select({
+                message: "请选择软件包管理器: ",
+                choices: [
+                    {
+                        name: 'npm',
+                        value: 'npm',
+                    },
+                    {
+                        name: 'pnpm',
+                        value: 'pnpm',
+                    },
+                ],
+            })
+
             // 下载模板
             let downloading = ora('downloading template ...');
             downloading.start();
@@ -79,28 +94,35 @@ const init = async (projectName: string) => {
             console.log(symbol.success, chalk.green('模板下载完成!'));
             console.log()
 
-            // 判断是否安装了 pnpm
-            await ensurePnpmInstalled()
+            if (packageManager === 'pnpm') {
+                // 判断是否安装了 pnpm
+                await ensurePnpmInstalled()
+            } else {
+                const { stdout } = await execPromise('npm --version');
+                console.log(chalk.bold(`npm install v${stdout}`));
+            }
 
             // 下载依赖
             let initializing = ora('initializing project ...');
             initializing.start();
             try {
-                await execPromise(`cd ${projectName} && pnpm install`)
+                await execPromise(`cd ${projectName} && ${packageManager} install`)
             } catch(error) {
                 initializing.fail();
-                console.log(symbol.error, chalk.red(`执行 pnpm install 时出错: ${error}`));
+                console.log(symbol.error, chalk.red(`执行 ${packageManager} install 时出错: ${error}`));
                 return
             }
             initializing.succeed();
             console.log(symbol.success, chalk.green('依赖安装完成!'));
+            console.log()
 
-            console.log()
-            console.log('使用以下命令开始:');
-            console.log()
-            console.log(chalk.gray('$ ')+chalk.cyan(`cd ${projectName}`))
-            console.log(chalk.gray('$ ')+chalk.cyan(`pnpm run serve`))
-            console.log()
+            if (['vue3', 'vue2'].includes(preset)) {
+                console.log('使用以下命令开始:');
+                console.log()
+                console.log(chalk.gray('$ ')+chalk.cyan(`cd ${projectName}`))
+                console.log(chalk.gray('$ ')+chalk.cyan(preset === 'vue3' ? `${packageManager} run dev` : `${packageManager} run serve`))
+                console.log()
+            }
         } catch (err) {
             console.log(symbol.error, chalk.red(`template init failed.\r\n${err}`));
             return

@@ -9,8 +9,8 @@
     "skipLibCheck": true,        // 跳过第三方库类型检查
     "moduleResolution": "node",   // 模块解析策略
     "resolveJsonModule": true,  // 支持导入 JSON
-    "typeRoots": ["./node_modules/@types", "./typings"],  // 类型定义文件目录
+    "typeRoots": ["./node_modules/@types", "./types"],  // 类型定义文件目录
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }

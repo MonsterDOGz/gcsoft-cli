@@ -4,7 +4,7 @@
  * @Description: 入口文件
  * @FilePath: \gcsoft-cli\src\main.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-25 15:53:56
+ * @LastEditTime: 2025-02-26 11:15:41
  */
 import { Command  } from 'commander';
 import { VERSION } from './utils/constants';
@@ -13,8 +13,8 @@ import apply from './index';
 const program = new Command();
 
 program
-  .name('gcsoft-cli')
-  .description('一个简单的脚手架工具')
+  .name('gcsoft')
+  .description('基于模板快速生成项目的脚手架工具，提供 vue3、vue2 基础模板，以及手动输入指定模板。')
   .version(VERSION, '-V, --version', '输出版本号');
 
 interface IArgument {
@@ -41,7 +41,7 @@ const actionMap: IActionMap = {
     init: {
         description: '从模板中生成新项目',
         usages: [
-            'gcsoft init projectName'
+            'gcsoft init myProject'
         ],
         arguments: [
             {
@@ -72,12 +72,12 @@ const actionMap: IActionMap = {
             {
                 key: 'key',
                 required: false,
-                description: '请输入键名'
+                description: '键名'
             },
             {
                 key: 'value',
                 required: false,
-                description: '如果handle为set，则需要value'
+                description: '键值，如果 handle 为 set 则需要 value'
             }
         ],
         actionFunc: (handle, key, value) => {

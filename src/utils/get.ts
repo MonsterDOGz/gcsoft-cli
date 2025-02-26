@@ -4,12 +4,13 @@
  * @Description: 获取模板
  * @FilePath: \gcsoft-cli\src\utils\get.ts
  * @LastEditors: MonsterDOG
- * @LastEditTime: 2025-02-25 10:47:18
+ * @LastEditTime: 2025-02-26 14:27:43
  */
 import { RC, DEFAULTS } from './constants';
 import downloadGit from 'download-git-repo';
 import { parse } from 'ini';
 import { stat, readFile } from 'fs/promises'
+
 
 export const downloadLocal = async (templateName: string, projectName: string) => {
     let config = null;
@@ -25,7 +26,7 @@ export const downloadLocal = async (templateName: string, projectName: string) =
     let api = `${config.registry}/${templateName}`;
     return new Promise((resolve, reject) => {
         // projectName 为下载到的本地目录
-        downloadGit(api, projectName, (err: any) => {
+        downloadGit(api, projectName, {}, (err: object | undefined) => {
             if (err) {
                 reject(err);
             }
