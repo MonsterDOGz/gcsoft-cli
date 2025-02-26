@@ -30,6 +30,9 @@ importers:
         specifier: ^5.4.1
         version: 5.4.1
     devDependencies:
+      '@types/degit':
+        specifier: ^2.8.6
+        version: 2.8.6
       '@types/ini':
         specifier: ^4.1.1
         version: 4.1.1
@@ -165,6 +168,9 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
+
+  '@types/degit@2.8.6':
+    resolution: {integrity: sha512-y0M7sqzsnHB6cvAeTCBPrCQNQiZe8U4qdzf8uBVmOWYap5MMTN/gB2iEqrIqFiYcsyvP74GnGD5tgsHttielFw==}
 
   '@types/ini@4.1.1':
     resolution: {integrity: sha512-MIyNUZipBTbyUNnhvuXJTY7B6qNI78meck9Jbv3wk0OgNwRyOOVEKDutAkOs1snB/tx0FafyR6/SN4Ps0hZPeg==}
@@ -491,6 +497,8 @@ snapshots:
   '@inquirer/type@3.0.4(@types/node@22.13.5)':
     optionalDependencies:
       '@types/node': 22.13.5
+
+  '@types/degit@2.8.6': {}
 
   '@types/ini@4.1.1': {}
 

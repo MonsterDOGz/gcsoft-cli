@@ -36,6 +36,7 @@
     "ora": "^5.4.1"
   },
   "devDependencies": {
+    "@types/degit": "^2.8.6",
     "@types/ini": "^4.1.1",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^22.13.1",
