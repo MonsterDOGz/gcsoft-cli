@@ -1,22 +1,22 @@
 {
   "version": "0.2.0",
   "configurations": [
-    {
-      // 使用 ts-node 在开发环境运行 TypeScript 文件
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program with ts-node",
-      "skipFiles": ["<node_internals>/**"],
-      "runtimeExecutable": "npx",
-      "runtimeArgs": [
-        "ts-node",
-        "--require",
-        "${workspaceFolder}/src/main.ts"
-      ],
-      "outFiles": [
-        "${workspaceFolder}/lib/**/*.js"  // 可选
-      ]
-    },
+    // {
+    //   // 使用 ts-node 在开发环境运行 TypeScript 文件
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "Launch Program with ts-node",
+    //   "skipFiles": ["<node_internals>/**"],
+    //   "runtimeExecutable": "npx",
+    //   "runtimeArgs": [
+    //     "ts-node",
+    //     "--require",
+    //     "${workspaceFolder}/src/main.ts"
+    //   ],
+    //   "outFiles": [
+    //     "${workspaceFolder}/lib/**/*.js"  // 可选
+    //   ]
+    // },
     {
       // 使用 tsc 编译 TypeScript 文件后在生产环境运行 JavaScript 文件
       "type": "node",

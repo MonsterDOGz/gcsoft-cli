@@ -24,8 +24,7 @@ pnpm add -g gcsoft-cli
 
 ## Config
 
-可以自行配置 gcsoft-cli，可修改 `type`, `registry`, `vue3`, `vue2` 配置项
-- `gcsoft config set type users`
+可以自行配置 gcsoft-cli，可修改 `registry`, `vue3`, `vue2` 配置项
 - `gcsoft config set registry MonsterDOGz`
 - `gcsoft config set vue3 vue3-template` 修改 vue3 模板
 - `gcsoft config set vue2 vue2-template` 修改 vue2 模板

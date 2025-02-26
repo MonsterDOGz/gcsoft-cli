@@ -1,6 +1,6 @@
 {
   "name": "gcsoft-cli",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "一个简单的脚手架工具",
   "homepage": "https://github.com/MonsterDOGz/gcsoft-cli",
   "repository": {
@@ -12,7 +12,6 @@
     "gcsoft": "./bin/www"
   },
   "scripts": {
-    "dev": "ts-node src/main.ts",
     "build": "tsc",
     "watch": "tsc --watch"
   },
@@ -31,7 +30,7 @@
     "@inquirer/prompts": "^7.3.2",
     "chalk": "^4.1.2",
     "commander": "^13.1.0",
-    "download-git-repo": "^3.0.2",
+    "degit": "^2.8.4",
     "ini": "^5.0.0",
     "log-symbols": "^4.1.0",
     "ora": "^5.4.1"
@@ -40,7 +39,6 @@
     "@types/ini": "^4.1.1",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^22.13.1",
-    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
 }
